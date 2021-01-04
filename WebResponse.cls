@@ -411,3 +411,4 @@ Private Sub Class_Initialize()
     Set Headers = New Collection
     Set Cookies = New Collection
 End Sub
+

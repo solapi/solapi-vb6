@@ -6,3 +6,4 @@ Public Const ApiSecret = "INPUT YOUR API SECRET"
 Public Const Domain = "api.solapi.com"
 Public Const Protocol = "https"
 Public Const Prefix = "/"
+

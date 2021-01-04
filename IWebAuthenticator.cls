@@ -73,3 +73,4 @@ End Sub
 Public Sub PrepareCurl(ByVal Client As WebClient, ByVal Request As WebRequest, ByRef Curl As String)
     ' e.g. Add flags to cURL
 End Sub
+

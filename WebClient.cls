@@ -760,3 +760,4 @@ Private Sub Class_Initialize()
     Me.Insecure = False
     Me.FollowRedirects = True
 End Sub
+

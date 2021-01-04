@@ -877,3 +877,4 @@ Private Sub Class_Initialize()
     Set Me.Cookies = New Collection
     Me.ContentLength = -1
 End Sub
+
