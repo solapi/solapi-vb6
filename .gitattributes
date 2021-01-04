@@ -1,0 +1,4 @@
+*.frm text merge=union eol=crlf
+*.cls text merge=union eol=crlf
+*.bas text merge=union eol=crlf
+*.vbp text merge=union eol=crlf
