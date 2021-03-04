@@ -1,14 +1,32 @@
 VERSION 5.00
 Begin VB.Form Form1 
    Caption         =   "Form1"
-   ClientHeight    =   3375
+   ClientHeight    =   3525
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   5070
    LinkTopic       =   "Form1"
-   ScaleHeight     =   3375
+   ScaleHeight     =   3525
    ScaleWidth      =   5070
    StartUpPosition =   3  'Windows Default
+   Begin VB.CommandButton SenderIds 
+      Caption         =   "발신번호 조회"
+      Height          =   495
+      Index           =   0
+      Left            =   3360
+      TabIndex        =   9
+      Top             =   2640
+      Width           =   1215
+   End
+   Begin VB.CommandButton UnitPrice 
+      Caption         =   "단가조회"
+      Height          =   495
+      Index           =   1
+      Left            =   3360
+      TabIndex        =   8
+      Top             =   2040
+      Width           =   1215
+   End
    Begin VB.CommandButton Chingutalk 
       Caption         =   "친구톡 발송"
       Height          =   495
@@ -291,6 +309,30 @@ Private Sub MessageList_Click(Index As Integer)
 End Sub
 
 
+Private Sub SenderIds_Click(Index As Integer)
+    Dim Response As WebResponse
+    Set Response = Request("senderid/v1/numbers/active", "GET")
+    If Response.StatusCode = WebStatusCode.Ok Then
+        ' JSON Object로 접근
+        Dim senderIds As String
+        For i = 1 To Response.data.Count
+            Debug.Print ("발신번호:" & Response.data(i))
+            senderIds = senderIds & Response.data(i)
+            If i <> Response.data.Count Then
+                senderIds = senderIds & ", "
+            End If
+        Next
+
+        ' String 형식으로 접근 모든 내용 출력
+        Debug.Print (Response.Content)
+        
+        MsgBox ("발신번호 목록: " & senderIds)
+    Else
+        Debug.Print ("발신번호조회 실패")
+        Debug.Print (Response.Content)
+    End If
+End Sub
+
 Private Sub SMS_Click()
     Dim msg1 As New Dictionary
     msg1.Add "to", "01000000001"
@@ -434,3 +476,23 @@ Handler:
 End Sub
 
 
+Private Sub UnitPrice_Click(Index As Integer)
+    Dim Response As WebResponse
+    Set Response = Request("pricing/v1/messaging", "GET")
+    If Response.StatusCode = WebStatusCode.Ok Then
+        ' JSON Object로 접근
+        Debug.Print ("SMS 단가:" & Response.data("sms"))
+        Debug.Print ("LMS 단가:" & Response.data("lms"))
+        Debug.Print ("MMS 단가:" & Response.data("mms"))
+        Debug.Print ("알림톡 단가:" & Response.data("ata"))
+        Debug.Print ("친구톡 단가:" & Response.data("cta"))
+        Debug.Print ("친구톡 이미지 단가:" & Response.data("cti"))
+        Debug.Print ("네이버스마트알림 단가:" & Response.data("nsa"))
+        ' String 형식으로 접근 모든 내용 출력
+        Debug.Print (Response.Content)
+        MsgBox ("단가 안내" & vbCrLf & "SMS:" & Response.data("sms") & vbCrLf & "LMS:" & Response.data("lms") & vbCrLf & "MMS:" & Response.data("mms") & vbCrLf & "알림톡:" & Response.data("ata") & vbCrLf & "친구톡:" & Response.data("cta") & vbCrLf & "친구톡(이미지):" & Response.data("cti") & vbCrLf & "네이버스마트알림:" & Response.data("nsa"))
+    Else
+        Debug.Print ("단가조회 실패")
+        Debug.Print (Response.Content)
+    End If
+End Sub
