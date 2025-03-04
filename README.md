@@ -1,6 +1,12 @@
 # solapi-vb6
 Visual Basic 6용 솔라피 SDK입니다. 아래 사항을 참고하세요.
 
+## 🛑 주의사항
+* 더이상 솔라피 VB6 SDK는 유지보수 되지 않습니다! 아래의 링크를 통해 API 설명 문서를 참고하셔서 직접 구현하시는 것을 권장드립니다.
+* [SOLAPI API 설명문서](https://developers.solapi.com/references/)
+
+### VB6 SOLAPI SDK 설명
+
 1. Visual Basic 6 개발 환경이 갖춰진 PC에서 예제 실행을 위해 Project1.vbp 파일을 열어주세요.
 2. 메뉴 Project -> References 에서 아래 해당 라이브러리에 체크되어 있는지 확인해 주세요.
   - Microsoft WinHTTP Services, version 5.1
